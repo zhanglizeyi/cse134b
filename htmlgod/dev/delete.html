@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta name="description" content="dev controls">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>&lt;HTMl God Dev&gt;</title>
+    <script src="https://cdn.firebase.com/js/client/2.2.7/firebase.js"></script>
+</head>
+
+<body>
+    <h1>Delete Tag</h1>
+    <h3>CRUD</h3>
+    <ul>
+        <li><a href="create.html">Create Tag</a></li>
+        <li><a href="update.html">Update Tag</a></li>
+        <li><a href="lookup.html">Lookup Tag</a></li>
+    </ul>
+    <form name="deleteTag">
+        <h3>Tag input Form</h3> Tag Name:
+        <br>
+        <input type="text" name="tagName">
+        <br>
+        <input type="submit" value="submit" onclick="deleteTag()">
+    </form>
+    <!-- default script for CRUD-->
+    <script>
+    //node JS refrence
+    var Firebase = require("firebase");
+    //create refrence to firebase database
+    var myFirebaseRef = new Firebase("https://htmlgod.firebaseio.com/");
+
+    function deleteTag() {
+        var name = document.getElementsByName('tagName').value;
+        myFirebaseRef.child(name).remove();
+
+    }
+    </script>
+</body>
+
+</html>

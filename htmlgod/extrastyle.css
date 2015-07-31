@@ -1,0 +1,29 @@
+@import url(http://fonts.googleapis.com/css?family=Lato:400);
+* {
+    font-family: 'Lato', sans-serif !important;
+}
+
+#logo {
+    text-decoration: none;
+}
+
+#description {
+    background-color: #ffebeb;
+}
+
+#attributes {
+    background-color: #ebebff;
+}
+
+#browsersupport {
+    background-color: #ebffeb;
+}
+
+#example {
+    background-color: #ffffeb;
+}
+
+.jumbotron {
+    color: white;
+    background-color: #337ab7;
+}

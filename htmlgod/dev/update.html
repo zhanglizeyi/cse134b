@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta name="description" content="dev controls">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>&lt;HTMl God Dev&gt;</title>
+    <script src="https://cdn.firebase.com/js/client/2.2.7/firebase.js"></script>
+</head>
+
+<body>
+    <h1>Delete Tag</h1>
+    <h3>CRUD</h3>
+    <ul>
+        <li><a href="create.html">Create Tag</a></li>
+        <li><a href="update.html">Update Tag</a></li>
+        <li><a href="lookup.html">Lookup Tag</a></li>
+    </ul>
+    <form name="updateTag">
+        <h3>Tag input Form</h3> Tag Name:
+        <br>
+        <input type="text" name="tagName">
+        <br>Description:
+        <br>
+        <textarea name="description" style="width:60%; height:200px;"></textarea>
+        <br>Attributes:
+        <br> Name:
+        <input type="text" name="att1"> Value:
+        <input type="text" name="val1"> Description:
+        <input type="text" name="desc1">
+        <h3>Browser Support:</h3> Chrome:
+        <input type="text" name="chrome"> Firefox:
+        <input type="text" name="firefox"> Safari:
+        <input type="text" name="safari"> Internet Explorer:
+        <input type="text" name="ie"> Opera:
+        <input type="text" name="opera">
+        <br>
+        <h3>Example:</h3> Example code:
+        <br>
+        <textarea name="exCode" style="width:60%; height:200px;"></textarea>
+        <br>Result code:
+        <br>
+        <textarea name="resCode" style="width:60%; height:200px;"></textarea>
+        <br>
+        <input type="submit" value="submit" onclick="updateTag()">
+    </form>
+    <!-- default script for CRUD-->
+    <script>
+    //node JS refrence
+    var Firebase = require("firebase");
+    //create refrence to firebase database
+    var myFirebaseRef = new Firebase("https://htmlgod.firebaseio.com/");
+
+    function updateTag() {
+        //create tags and attribute object
+        var tag = fireRef.child("tag");
+        //var att = tag.child("attribute");
+
+        //create from varibles
+        var frm_desc = updateTag.description.value;
+        var frm_chrome = updateTag.chrome.value;
+        var frm_fire = updateTag.firefox.value;
+        var frm_safari = updateTag.safari.value;
+        var frm_att1 = updateTag.att1.value;
+        var frm_val1 = updateTag.val1.value;
+        var frm_desc1 = updateTag.desc1.value;
+        var frm_ie = updateTag.ie.value;
+        var frm_opera = updateTag.opera.value;
+        var frm_exCode = updateTag.exCode.value;
+        var frm_resCode = updateTag.resCode.value;
+
+
+        //save the form
+        tag.child(updateTag.tagName.value).update({
+            desc: frm_desc,
+            //attributes: 
+            chrome: frm_chrome,
+            firefox: frm_fire,
+            safari: frm_safari,
+            ie: frm_ie,
+            opera: frm_opera,
+            exampleCode: frm_exCode,
+            resultCode: frm_resCode
+        });
+    }
+    </script>
+</body>
+
+</html>

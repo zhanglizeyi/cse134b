@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta name="description" content="dev controls">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>&lt;HTMl God Dev&gt;</title>
+    <script src="https://cdn.firebase.com/js/client/2.2.7/firebase.js"></script>
+</head>
+
+<body>
+    <h1>Create Tag</h1>
+    <h3>CRUD</h3>
+    <ul>
+        <li><a href="update.html">Update Tag</a></li>
+        <li><a href="lookup.html">Lookup Tag</a></li>
+        <li><a href="delete.html">Delete Tag</a></li>
+    </ul>
+    <form name="createTag">
+        <h3>Tag input Form</h3> Tag Name:
+        <br>
+        <input type="text" name="tagName">
+        <br>Description:
+        <br>
+        <textarea name="description" style="width:60%; height:200px;"></textarea>
+        <br>Attributes:
+        <input type="button" onclick="javascript:addAtt();" value="Add Attribute">
+        <div id="attList">
+        </div>
+        <h3>Browser Support:</h3> Chrome:
+        <input type="text" name="chrome"> Firefox:
+        <input type="text" name="firefox"> Safari:
+        <input type="text" name="safari"> Internet Explorer:
+        <input type="text" name="ie"> Opera:
+        <input type="text" name="opera">
+        <br>
+        <h3>Example:</h3> Example code:
+        <br>
+        <textarea name="exCode" style="width:60%; height:200px;"></textarea>
+        <br>Result code:
+        <br>
+        <textarea name="resCode" style="width:60%; height:200px;"></textarea>
+        <br>
+        <input type="submit" value="submit" onclick="pushTag()">
+    </form>
+    <!-- default script for CRUD-->
+    <script>
+    //create refrence to firebase database
+    var fireRef = new Firebase("https://htmlgod.firebaseio.com/");
+        
+    var attCount = 0;
+
+    //function to create tag    
+    function pushTag() {
+        //create tags and attribute object
+        var tag = fireRef.child("tag");
+
+
+        //create from varibles
+        var frm_desc = createTag.description.value;
+        var frm_chrome = createTag.chrome.value;
+        var frm_fire = createTag.firefox.value;
+        var frm_safari = createTag.safari.value;
+        var frm_attributes = createAtt();
+        var frm_ie = createTag.ie.value;
+        var frm_opera = createTag.opera.value;
+        var frm_exCode = createTag.exCode.value;
+        var frm_resCode = createTag.resCode.value;
+
+
+        //save the form
+        tag.child(createTag.tagName.value).set({
+            desc: frm_desc,
+            attributes: frm_attributes, 
+            chrome: frm_chrome,
+            firefox: frm_fire,
+            safari: frm_safari,
+            ie: frm_ie,
+            opera: frm_opera,
+            exampleCode: frm_exCode,
+            resultCode: frm_resCode
+        });
+    }
+        
+    function addAtt(){
+         
+        var att_name = document.createElement("input");
+        att_name.id = "attname" + attCount.toString();
+        att_name.type = "text";
+        
+        var att_val = document.createElement("input");
+        att_val.id= "attval" + attCount.toString();
+        att_val.type = "text";
+        
+        var att_desc = document.createElement("input");
+        att_desc.id = "attdesc" + attCount.toString();
+        att_desc.type = "text";
+        
+        var br = document.createElement("br");
+        var txt_name = document.createTextNode("Name: " );
+        var txt_val = document.createTextNode(" Value: " );
+        var txt_desc = document.createTextNode(" Description: " );
+        
+        var att_list = document.getElementById("attList");
+        att_list.appendChild(br)
+        att_list.appendChild(txt_name);
+        att_list.appendChild(att_name);
+        att_list.appendChild(txt_val);
+        att_list.appendChild(att_val);
+        att_list.appendChild(txt_desc);
+        att_list.appendChild(att_desc);
+        
+        attCount++;
+        
+    }
+        
+    function createAtt(){
+        
+        var arr_att = [];
+        
+        for(var i = 0; i< attCount; i++)
+        {
+            arr_att[i] = [document.getElementById("attname" + i.toString()).value,
+                          document.getElementById("attval" + i.toString()).value,
+                          document.getElementById("attdesc" + i.toString()).value]
+        }
+        
+        return arr_att;
+    }
+    </script>
+</body>
+
+</html>

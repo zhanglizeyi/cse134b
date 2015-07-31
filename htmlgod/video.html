@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta name="description" content="Bootstrap Version">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>&lt;HTMl God&gt;</title>
+    <link href="extrastyle.css" rel="stylesheet">
+    <link href="bootstrap.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-2" id="nav">
+                <nav>
+                    <header> <a id="logo" href="index.html"><h1>HTML God</h1></a> </header>
+                    <article>
+                        <form>
+                            <input type="text" class="form-control" placeholder="Search for an element"> </form>
+                    </article>
+                    <ul>
+                        <li> <a href="index.html">Home</a> </li>
+                        <li> <a href="">Elements</a>
+                            <ul>
+                                <li><a href="">The Root element</a></li>
+                                <li><a href="">Document metadata</a></li>
+                                <li><a href="">Scripting</a></li>
+                                <li><a href="">Sections</a></li>
+                                <li><a href="">Grouping content</a></li>
+                                <li><a href="">Text-level semantics</a></li>
+                                <li><a href="">Edits</a></li>
+                                <li><a href="">Embedded Content</a></li>
+                                <ul>
+                                    <li><a href="video.html">video</a></li>
+                                </ul>
+                                <li><a href="">Tables</a></li>
+                                <li><a href="">Forms</a></li>
+                                <li><a href="">Interactive elements </a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="col-md-10">
+                <article>
+                    <ol class="breadcrumb">
+                        <li><a href="#">Resources</a></li>
+                        <li><a href="#">Embedded content</a></li>
+                        <li class="active">video</li>
+                    </ol>
+                </article>
+                <main>
+                    <h1>&lt;video&gt;</h1>
+                    <section id="description">
+                        <header>
+                            <h3>Description</h3> </header>
+                        <p>The &lt;video&gt; element is used to embed video content. </p>
+                    </section>
+                    <section id="attributes">
+                        <header>
+                            <h3>Attributes</h3> </header>
+                        <table class="table table-striped">
+                            <tr>
+                                <th>Attribute</th>
+                                <th>Value</th>
+                                <th>Description</th>
+                            </tr>
+                            <tr>
+                                <td>autoplay</td>
+                                <td>autoplay</td>
+                                <td>Specifies that the video will start playing as soon as it is ready</td>
+                            </tr>
+                            <tr>
+                                <td>controls</td>
+                                <td>controls</td>
+                                <td>Specifies that video controls should be displayed (such as a play/pause button etc).</td>
+                            </tr>
+                            <tr>
+                                <td>height</td>
+                                <td>pixels</td>
+                                <td>Sets the height of the video player</td>
+                            </tr>
+                            <tr>
+                                <td>loop</td>
+                                <td>loop</td>
+                                <td>Specifies that the video will start over again, every time it is finished</td>
+                            </tr>
+                            <tr>
+                                <td>muted</td>
+                                <td>muted</td>
+                                <td>Specifies that the audio output of the video should be muted</td>
+                            </tr>
+                            <tr>
+                                <td>mediagroup</td>
+                                <td>string</td>
+                                <td>Instructs the ua to link multiple videos and/or audio streams together.</td>
+                            </tr>
+                            <tr>
+                                <td>poster</td>
+                                <td>url</td>
+                                <td>Specifies an image to be shown while the video is downloading, or until the user hits the play button</td>
+                            </tr>
+                            <tr>
+                                <td>preload</td>
+                                <td>auto | metadata | none</td>
+                                <td>Specifies if and how the author thinks the video should be loaded when the page loads</td>
+                            </tr>
+                            <tr>
+                                <td>src</td>
+                                <td>url</td>
+                                <td>Specifies the url of the video file</td>
+                            </tr>
+                            <tr>
+                                <td>width</td>
+                                <td>pixels</td>
+                                <td>Sets the width of the video player</td>
+                            </tr>
+                        </table>
+                    </section>
+                    <section id="browsersupport">
+                        <header>
+                            <h3>Browser Support</h3> </header>
+                        <p>First browser version to fully support element.</p>
+                        <table class="table table-striped">
+                            <tr>
+                                <th>Chrome</th>
+                                <th>Firefox</th>
+                                <th>Safari</th>
+                                <th>Internet Explorer</th>
+                                <th>Opera</th>
+                            </tr>
+                            <tr>
+                                <td>4.0</td>
+                                <td>3.5</td>
+                                <td>4.0</td>
+                                <td>9.0</td>
+                                <td>10.5</td>
+                            </tr>
+                        </table>
+                    </section>
+                    <section id="example">
+                        <header>
+                            <h3>Example</h3> </header>
+                        <div class="row">
+                            <div class="col-md-5">
+                                <table class="table table-bordered">
+                                    <tr>
+                                        <th>HTML</th>
+                                    </tr>
+                                    <tr>
+                                        <td><code> &lt;video controls width="300" loop muted poster="http://bit.ly/1F4iKz8"&gt; &lt;source src="http://bit.ly/1nzVswl"&gt; &lt;/video&gt; </code></td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="col-md-5">
+                                <table class="table table-bordered">
+                                    <tr>
+                                        <th>Result</th>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <video controls width="300" loop muted poster="http://bit.ly/1F4iKz8">
+                                                <source src="http://bit.ly/1nzVswl"> </video>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </section>
+                </main>
+                <footer>&#169; HTML God 2015</footer>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

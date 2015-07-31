@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta name="description" content="Bootstrap Version">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>&lt;HTMl God&gt;</title>
+    <link href="bootstrap.css" rel="stylesheet">
+    <link href="extrastyle.css" rel="stylesheet">
+    <script src="https://cdn.firebase.com/js/client/2.2.7/firebase.js"></script>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-2" id="nav">
+                <nav>
+                    <header>
+                        <a id="logo" href="index.html"><h1>HTML God</h1></a>
+                    </header>
+                    <article>
+                        <form onSubmit="javascript:return getValue();">
+                            <input id="searchBox" list="taglist" class="form-control" placeholder="Search for an element">
+                        </form>
+                        <datalist id="taglist">
+                        </datalist>
+                    </article>
+                    <ul>
+                        <li><a href="index.html">Home</a>
+                        </li>
+                        <li><a href="">Elements</a>
+                            <ul id="tags">
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="col-md-10">
+                <article>
+                    <ol class="breadcrumb" hidden>
+                        <li><a href="#">Resources</a></li>
+                        <li><a href="#">Embedded content</a></li>
+                        <li class="active">video</li>
+                    </ol>
+                </article>
+                <main id="tags_display" style="display:none">
+                    <h1>&lt;<span id="tag_name"></span>&gt;</h1>
+                    <section id="description">
+                        <header>
+                            <h3>Description</h3>
+                        </header>
+                        <p id="tag_desc"></p>
+                    </section>
+                    <section id="attributes">
+                        <header>
+                            <h3>Attributes</h3>
+                        </header>
+                        <table id="att_table" class="table table-striped">
+                            <tr>
+                                <th>Attribute</th>
+                                <th>Value</th>
+                                <th>Description</th>
+                            </tr>
+                        </table>
+                    </section>
+                    <section id="browsersupport">
+                        <header>
+                            <h3>Browser Support</h3>
+                        </header>
+                        <p>First browser version to fully support element.</p>
+                        <table class="table table-striped">
+                            <tr>
+                                <th>Chrome</th>
+                                <th>Firefox</th>
+                                <th>Safari</th>
+                                <th>Internet Explorer</th>
+                                <th>Opera</th>
+                            </tr>
+                            <tr>
+                                <td id="tag_chrome"></td>
+                                <td id="tag_firefox"></td>
+                                <td id="tag_safari"></td>
+                                <td id="tag_ie"></td>
+                                <td id="tag_opera"></td>
+                            </tr>
+                        </table>
+                    </section>
+                    <section id="example">
+                        <header>
+                            <h3>Example</h3> </header>
+                        <div class="row">
+                            <div class="col-md-5">
+                                <table class="table table-bordered">
+                                    <tr>
+                                        <th>HTML</th>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <code id="tag_ex">
+                                            </code>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="col-md-5">
+                                <table class="table table-bordered">
+                                    <tr>
+                                        <th>Result</th>
+                                    </tr>
+                                    <tr>
+                                        <td id ="tag_result">
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </section>
+                </main>
+                <footer>&#169; HTML God 2015</footer>
+            </div>
+        </div>
+    </div>
+    <script>
+    //create refrence to firebase database
+    var fireRef = new Firebase("https://htmlgod.firebaseio.com/tag");
+
+    //build the menu
+    buildMenu();
+    buildDataList();
+
+    var currentPage = null;
+
+    //function used to build the menu
+    function buildMenu() {
+
+        //query the database to order by name
+        fireRef.on("value", function(snapshot) {
+
+            //for each value in JSON
+            snapshot.forEach(function(childSnap) {
+                //get tag element name
+                var tagName = childSnap.key();
+
+                //create refrence to tags list element
+                var list = document.getElementById("tags");
+
+                //create li and anchor tags
+                var entry = document.createElement("li");
+                var link = document.createElement("a");
+
+                //create textnode of link name
+                var linkName = document.createTextNode("<" + tagName + ">");
+
+                //add link name to anchor tag
+                link.appendChild(linkName);
+
+                //set title of anchor tag
+                link.title = tagName.toString();
+
+                //add href calling javascript funciton to build the page
+                link.href = "javascript:buildPage(\"" + tagName.toString() + "\");";
+
+                //add the link to list item
+                entry.appendChild(link);
+
+                //add list item to tags list
+                list.appendChild(entry);
+            });
+        });
+
+        return 1;
+    };
+
+    //this will build the datalist for the search box
+    function buildDataList() {
+
+        //query the database to order by name
+        fireRef.on("value", function(snapshot) {
+
+            //for each value in JSON
+            snapshot.forEach(function(childSnap) {
+                //get tag element name
+                var tagName = childSnap.key();
+
+                //create refrence to tags list element
+                var list = document.getElementById("taglist");
+
+                //create li and anchor tags
+                var entry = document.createElement("option");
+                entry.value = tagName.toString()
+
+                //add list item to tags list
+                list.appendChild(entry);
+            });
+        });
+    };
+
+    //this will build the page on search endry
+    function buildPage(p1) {
+        //changes the logo text CHANGE THIS
+        document.getElementById("tags_display").style.display = "block";
+        
+        //clear old table data and insert header
+        document.getElementById("att_table").innerHTML = "<tr><th>Attribute</th><th>Value</th><th>Description</th></tr>";
+        
+        fireRef.child(p1).on("value", function(snapshot) {
+
+            //get names of all attributes
+            var name = snapshot.key();
+            var desc = snapshot.val().desc;
+            var chrome = snapshot.val().chrome;
+            var firefox = snapshot.val().firefox;
+            var safari = snapshot.val().safari;
+            var ie = snapshot.val().ie;
+            var opera = snapshot.val().opera;
+            var outEx = snapshot.val().exampleCode;
+            var outOp = snapshot.val().resultCode;
+            
+            //fill attributes section
+            var atts = snapshot.val().attributes;
+            
+            for (var i=0; i < atts.length; i++)
+            {
+                //create rows to add
+                var tab_row = document.createElement("tr");
+                
+                //create table data elements
+                var tab_att = document.createElement("td");
+                var tab_val = document.createElement("td");
+                var tab_desc = document.createElement("td");
+                
+                //add text to table data
+                tab_att.appendChild(document.createTextNode(atts[i][0]));
+                tab_val.appendChild(document.createTextNode(atts[i][1]));
+                tab_desc.appendChild(document.createTextNode(atts[i][2]));
+                
+                //add data to row
+                tab_row.appendChild(tab_att);
+                tab_row.appendChild(tab_val);
+                tab_row.appendChild(tab_desc);
+                
+                //add row to table
+                document.getElementById("att_table").appendChild(tab_row);
+                
+            }
+            
+            //set the html to read the input
+            document.getElementById("tag_name").innerHTML = name;
+            document.getElementById("tag_desc").innerHTML = desc;
+            document.getElementById("tag_chrome").innerHTML = chrome;
+            document.getElementById("tag_firefox").innerHTML = firefox;
+            document.getElementById("tag_safari").innerHTML = safari;
+            document.getElementById("tag_opera").innerHTML = opera;
+            document.getElementById("tag_ie").innerHTML = ie;
+            document.getElementById("tag_ex").innerHTML = outEx;
+            document.getElementById("tag_result").innerHTML = outOp;
+            
+            
+
+        });
+        //return false to avoid reloading
+        return false;
+    };
+
+    //gets the value of the search box and passed to buildpage
+    function getValue() {
+        //get search box value
+        var val = document.getElementById("searchBox");
+        var arg = val.value;
+
+        //reset search box
+        val.value = "";
+
+        //call build page
+        buildPage(arg);
+
+        //return false to avoid reloading
+        return false;
+    }
+    </script>
+</body>
+
+</html>

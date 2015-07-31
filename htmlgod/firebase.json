@@ -1,0 +1,9 @@
+{
+    "firebase": "htmlgod",
+    "public": ".",
+    "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+    ]
+}
